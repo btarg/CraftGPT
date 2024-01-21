@@ -1,0 +1,10 @@
+name: ChatGPTPlugin
+main: io.github.btarg.javaOpenAI.ChatGPTPlugin
+api-version: '1.20'
+version: '${version}'
+author: btarg
+description: A Minecraft plugin that uses ChatGPT to generate responses to in-game events.
+commands:
+  god:
+    description: Interact with the ChatGPT AI.
+    usage: /<command> [message]

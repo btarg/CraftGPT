@@ -1,16 +1,22 @@
-package io.github.btarg.javaOpenAI;
+package io.github.btarg.javaOpenAI.openai;
 
-import dev.langchain4j.agent.tool.Tool;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
-import io.github.btarg.javaOpenAI.memory.PersistentChatMemoryStore;
-import io.github.btarg.javaOpenAI.tools.Calculator;
+import dev.langchain4j.store.memory.chat.ChatMemoryStore;
+import io.github.btarg.javaOpenAI.openai.memory.PersistentChatMemoryStore;
+import io.github.btarg.javaOpenAI.openai.tools.Calculator;
 
-public class Main {
-    public static void main(String[] args) {
+public class ChatGPTAPI {
 
+    ChatMemoryStore chatMemoryStore;
+
+    public ChatGPTAPI(ChatMemoryStore chatMemoryStore) {
+        this.chatMemoryStore = chatMemoryStore;
+    }
+
+    public String GetResponse(String message) {
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .maxMessages(10)
                 .chatMemoryStore(new PersistentChatMemoryStore())
@@ -21,17 +27,10 @@ public class Main {
                 .tools(new Calculator())
                 .chatMemory(chatMemory)
                 .build();
-
-//        String question = "What is the square root of the sum of the numbers of letters in the words \"hello\" and \"world\"?";
-        String question = "What was the last square root calculated?";
-        String answer = assistant.chat(question);
-
-        System.out.println(answer);
-        // The square root of the sum of the number of letters in the words "hello" and "world" is approximately 3.162.
+        return assistant.chat(message);
     }
 
     interface Assistant {
-
         String chat(String userMessage);
     }
 

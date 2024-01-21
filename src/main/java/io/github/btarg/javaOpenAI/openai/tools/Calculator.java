@@ -1,4 +1,4 @@
-package io.github.btarg.javaOpenAI.tools;
+package io.github.btarg.javaOpenAI.openai.tools;
 
 import dev.langchain4j.agent.tool.Tool;
 
