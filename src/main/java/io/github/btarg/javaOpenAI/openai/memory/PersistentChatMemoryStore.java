@@ -28,6 +28,7 @@ public class PersistentChatMemoryStore implements ChatMemoryStore {
             try {
                 Path path = Paths.get(filePath);
                 if (!Files.exists(path)) {
+                    Files.createDirectories(path.getParent());
                     Files.createFile(path);
                 }
                 String json = new String(Files.readAllBytes(path));
@@ -47,6 +48,7 @@ public class PersistentChatMemoryStore implements ChatMemoryStore {
     @Override
     public void updateMessages(Object memoryId, List<ChatMessage> newMessages) {
         messages = newMessages;
+        save();
     }
 
     public void save() {
