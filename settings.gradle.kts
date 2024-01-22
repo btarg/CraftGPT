@@ -1,2 +1,2 @@
-rootProject.name = "backend"
+rootProject.name = "minecraft-gpt"
 

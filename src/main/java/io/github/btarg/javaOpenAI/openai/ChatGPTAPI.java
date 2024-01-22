@@ -10,6 +10,7 @@ import dev.langchain4j.store.memory.chat.ChatMemoryStore;
 import io.github.btarg.javaOpenAI.openai.memory.PersistentChatMemoryStore;
 import io.github.btarg.javaOpenAI.openai.tools.Calculator;
 import io.github.btarg.javaOpenAI.openai.tools.CommandTool;
+import io.github.btarg.javaOpenAI.openai.tools.ItemTool;
 import io.github.btarg.javaOpenAI.openai.tools.PlayerTool;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,7 +29,8 @@ public class ChatGPTAPI {
         Object[] tools = new Object[] {
                 new Calculator(),
                 new CommandTool(),
-                new PlayerTool()
+                new PlayerTool(),
+                new ItemTool()
         };
 
         ChatMemory chatMemory = MessageWindowChatMemory.builder()

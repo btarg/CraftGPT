@@ -1,0 +1,6 @@
+forbidden-commands:
+    - "stop"
+    - "reload"
+    - "kick"
+    - "ban"
+    - "kill"
