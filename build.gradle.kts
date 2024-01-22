@@ -27,7 +27,7 @@ dependencies {
 
 group = "io.github"
 version = "1.0-SNAPSHOT"
-description = "ChatGPTPlugin"
+description = "CraftGPT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks {
