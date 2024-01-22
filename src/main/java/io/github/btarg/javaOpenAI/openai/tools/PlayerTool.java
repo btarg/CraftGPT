@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class PlayerTool {
     @Tool("Gets a map of online players, where the key is the player's UUID and the value is their name")
     Map<UUID, String> getOnlinePlayers() {

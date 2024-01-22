@@ -11,11 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
+@SuppressWarnings("unused")
 public class ItemTool {
 
     @Tool("Give the player a basic item stack with the specified material and amount")
@@ -73,5 +71,54 @@ public class ItemTool {
                 stack.setItemMeta(meta);
             }
         }
+    }
+
+    @Tool("Get the display name of an item in the player's inventory")
+    String getItemDisplayName(String playerUUID, int slot) {
+        Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+        if (player != null) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (stack != null) {
+                ItemMeta meta = stack.getItemMeta();
+                if (meta != null && meta.hasDisplayName()) {
+                    return meta.displayName().toString();
+                }
+            }
+        }
+        return "";
+    }
+    @Tool("Get the lore of an item in the player's inventory")
+    List<String> getItemLore(String playerUUID, int slot) {
+        Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+        if (player != null) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (stack != null) {
+                ItemMeta meta = stack.getItemMeta();
+                if (meta != null && meta.hasLore()) {
+                    // for every line in the lore, deserialize it and add it to the list
+                    return Objects.requireNonNull(meta.lore()).stream().map(Objects::toString).toList();
+                }
+            }
+        }
+        return List.of();
+    }
+    @Tool("Get Enchantments of an item in the player's inventory")
+    Map<String, Integer> getItemEnchantments(String playerUUID, int slot) {
+        Player player = Bukkit.getPlayer(UUID.fromString(playerUUID));
+        if (player != null) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (stack != null) {
+                ItemMeta meta = stack.getItemMeta();
+                if (meta != null && meta.hasEnchants()) {
+                    // for every enchantment on the item, add it to the map
+                    return meta.getEnchants().entrySet().stream().collect(
+                            HashMap::new,
+                            (map, entry) -> map.put(entry.getKey().getKey().getKey(), entry.getValue()),
+                            HashMap::putAll
+                    );
+                }
+            }
+        }
+        return Map.of();
     }
 }

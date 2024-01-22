@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicReference;
 
+@SuppressWarnings("unused")
 public class CommandTool {
 
     public static final String COMMAND_SUCCESS = "Command ran successfully: ";
